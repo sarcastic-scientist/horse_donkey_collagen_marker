@@ -1,0 +1,329 @@
+---
+title: Your horse is a donkey! Identifying domesticated equids from Western Iberia using collagen fingerprinting
+author:
+  - name: Roshan Paladugu
+    email: rpaladugu@uevora.pt
+    affiliation: Universidade de Évora,Laboratório HERCULES,Sapienza Università di Roma
+    correspondingauthor: true
+    footnote: 1
+  - name: Kristine Korzow-Richter
+    email: krichter@fas.harvard.edu
+    affiliation: Harvard University
+    footnote: 1
+  - name: Maria João Valente
+    email: mvalente.ualg@fastmail.com
+    affiliation: Universidade do Algarve
+    footnote: 2
+  - name: Sónia Gabriel
+    email: gabriel.sonia@gmail.com
+    affiliation: Laboratório de Arqueociências (DGPC),Universidade do Porto,Universidade de Lisboa
+    footnote: 2
+  - name: Cleia Detry
+    email: cleiadetry@campus.ul.pt
+    affiliation: Universidade de Lisboa
+    footnote: 2
+  - name: Christina Warinner
+    email: warinner@fas.harvard.edu
+    affiliation: Harvard University,Max Planck Institute for Evolutionary Anthropology
+    footnote: 2  
+  - name: Cristina Barrocas Dias
+    email: cmbd@uevora.pt
+    affiliation: Universidade de Évora,Laboratório HERCULES
+    footnote: 2       
+          
+address:
+  - code: Universidade de Évora
+    address: Departamento de Química, Escola de Ciências e Tecnologia, Universidade de Évora, Colégio Luís António Verney, Rua Romão Ramalho 59, Évora, Portugal (7000-671)
+  - code: Universidade de Lisboa
+    address: Centro de Arqueologia da Universidade de Lisboa, Faculdade de Letras da Universidade de Lisboa, Alameda da Universidade, Lisboa, Portugal (1600-214)
+  - code: Laboratório HERCULES
+    address: Laboratório HERCULES, Universidade de Évora, Palácio do Vimioso, Largo Marquês de Marialva 8, Évora, Portugal (7000-554)
+  - code: Sapienza Università di Roma
+    address: Dipartimento di Biologia Ambientale, Sapienza Università di Roma, Piazzale A. Moro 5, 00185 Roma, Italy
+  - code: Harvard University
+    address: Peabody Museum 570, 11 Divinity Ave, Cambridge, MA 02138, United States of America  
+  - code: Universidade do Porto
+    address: CIBIO - InBIO, Campus de Vairão, R. Monte de Vairão, Vila do Conde, Portugal (4485-167)
+  - code: Laboratório de Arqueociências (DGPC)
+    address: Calçada do Mirante à Ajuda 10A, Lisboa, Portugal (1300-418)
+  - code: Max Planck Institute for Evolutionary Anthropology
+    address: Deutscher Platz 6, Leipzig, Germany (04103)
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+  - code: 2
+    text: "Equal contribution"
+abstract: |
+  Skeletal remains of two equid species, *Equus caballus* (horse) and *Equus asinus* (donkey), have been found in archaeological contexts throughout Iberia since the Neolithic and Chalcolithic periods, respectively. These two species play different economic and cultural roles, and therefore it is important to be able to distinguish between the two species to better understand their relative importance in the past human societies. The most reliable morphological features for distinguishing between the two domesticated equids are based on cranial measurements and tooth enamel folds, leading to only a small percentage of archaeological remains that can be identified to species. Ancient DNA (aDNA) analysis can be used to reliably distinguish the two species, but it can be cost prohibitive to apply to large assemblages, and aDNA preservation of non-cranial elements is often low. Collagen peptide mass fingerprinting by matrix-assisted laser desorption time-of-flight (MALDI-TOF) mass spectrometry, also known as zooarchaeology by mass spectrometry (ZooMS), is a minimally destructive and cost effective alternative to aDNA analysis for taxonomic determination. However, current ZooMS markers lack resolution below the genus level *Equus*.  In this paper, we report a novel ZooMS peptide marker that reliably distinguishes between horses and donkeys using the enzyme chymotrypsin. We apply this peptide marker to taxonomically identify bones from the Iberian Peninsula ranging from the Iron Age to the Late Modern Period. The peptide biomarker has the potential to facilitate the collection of morphological data for zooarchaeological studies of equids in Iberia and throughout Eurasia and Africa.
+
+header-includes:
+  - \usepackage{wasysym}
+  - \sloppy
+
+keywords: 
+  - Peptide mass fingerprinting
+  - Zooarchaeology
+  - Palaeontology
+  - Archaeology
+  - ZooMS
+journal: "Journal of Archaeological Sciences"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: biblio.bib
+linenumbers: TRUE
+numbersections: true
+csl: https://www.zotero.org/styles/elsevier-harvard
+output:
+    bookdown::pdf_book:
+      keep_tex: true
+      base_format: rticles::elsevier_article
+      extra_dependencies: "subfig"
+      citation_package: default
+---
+
+# Introduction
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(here)
+library(ggsci)
+library(kableExtra)
+library(patchwork)
+library(stringr)
+library(knitr)
+library(MALDIquant)
+library(MALDIquantForeign)
+
+knitr::opts_chunk$set(echo=FALSE, message = FALSE, error = FALSE, warning = FALSE)
+```
+
+```{r markerdatain, include=FALSE, echo=FALSE, results='asis'}
+ref_horse <- importMzMl(here("data","CTRP_LARC238.mzML"))
+
+ref_donkey <- importMzMl(here("data","CTRP_LARC2313.mzML"))
+
+
+df_ref_horse <- data.frame(mass=ref_horse[[1]]@mass,intensity=ref_horse[[1]]@intensity)
+df_ref_donkey <- data.frame(mass=ref_donkey[[1]]@mass,intensity=ref_donkey[[1]]@intensity)
+
+df_ref_horse |>
+  select(mass, intensity) |>
+  mutate(intensity_norm=(intensity/max(intensity))*100) -> df_ref_horse
+
+
+df_ref_donkey |> 
+  select(mass,intensity) |>
+  mutate(intensity2=(intensity/max(intensity)*-100)) -> df_ref_donkey_flip
+
+df_ref_donkey |> 
+  select(mass,intensity) |>
+  mutate(intensity_norm=(intensity/max(intensity)*100)) -> df_ref_donkey
+
+```
+
+
+Horse (*Equus caballus* / *Equus ferus*) and donkey (*Equus asinus*) along with their hybrids are important large domesticates in Holocene archaeological contexts. Domestic equids have played roles in the economy, travel, and conflicts of past societies. Horses have been utilised for riding, racing, and as mounts in war due to their intelligence and speed [@clutton-brock92; @hanot_bochaton18]. Donkeys, on the other hand, have been appreciated for their endurance and adaptations to harsh environments, leading them to be utilised for load-bearing [@baxter98; @kimura_etal13]. Accurate identification of domestic equids and their hybrids is an arduous but imperative task in archaeological studies. With the exception of situations where one of the species is entirely absent, it is usually difficult to distinguish between horse and donkey remains based on skeletal macroscopic criteria alone [@hanot_bochaton18].
+
+Conventional criteria for zooarchaeological identification are based on the morphology of teeth enamel folds [@armitage_chapman79; @davis80; @eisenmann80; @eisenmann81; @eisenmann86; @uerpmann02], the skull [@eisenmann80; @eisenmann86; @albizuri_nadal91; @azzaroli78; @groves_mazak67; @kunst00], and post-cranial elements [@arloing82; @eisenmann_beckouche86; @peters98; @hanot_bochaton18]. One problem with many of these criteria is that they are dependent on bone size and assume that horses and hybrids are larger than donkeys [@forest08; @hanot_etal17], which is not always accurate even when entire skeletons are available for analysis. More practically, intact skulls with complete post-cranial remains are rarely encountered in the archaeological record, and equids are more often represented by individual or fragmented bones that are difficult to taxonomically assign based on size. For example, two recent studies from England and Poland point out that horse bones at archaeological sites are partially the result of distinctive depositional processes, including the standardised post-mortem processing of their carcasses away from domestic sites at tanneries and knackers' yards [@ameen_etal21; @jaworski_etal20]. Species level determinations are most frequently made using teeth [@davis80; @chuang_bonhomme19; @eisenmann80; @eisenmann81; @eisenmann86], which generally represent a relatively small proportion of faunal assemblages. Further complicating species level identifications is the fact that equids are less frequently consumed than other domesticates, such as cattle, caprines, and suids. This leads to fewer measurable bones recovered from some sites, and consequently less morphological data is available to determine site-specific size profiles [@hanot_bochaton18]. 
+
+The most reliable means of taxonomic identification of archaeological equids has been through ancient DNA (aDNA) analyses [@cucchi_etal; @jonsson_etal14; @vilstrup_etal13; @weinstock_etal05], which comes with its own challenges, especially in regions such as the Iberian Peninsula that have very low success rates (10% -- 30%). Ancient DNA analyses can also be costly, especially when analysing large assemblages. Alternatively, proteomic based methods such as zooarchaeology by mass spectrometry (ZooMS) can provide high-throughput, low-cost taxonomic assignments, even in cases where preservation is too poor for aDNA recovery. However, previously published ZooMS markers provide taxonomic resolution only to the genus level in equids, thereby limiting the usefulness of the technique for studying species of *Equus*. In this manuscript we successfully utilised the new peptide marker to successfully distinguish horses and donkeys from Western Iberian Holocene contexts.
+
+```{r overview, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+
+df_equus_overview <- data.frame(sample_type = c(rep("Archaeological",6), "Taxonomic Reference"), time_period = c("Iron Age", "Roman", "Late Antiquity", "Medieval","Medieval", "Late Modern", "Modern"), country = c("Spain", "Portugal","Portugal","Portugal", "Spain", "Portugal","Portugal"), n= c(5,23,3,5,3,1,6))
+
+```
+
+
+
+# Domesticated equids in Iberia
+
+Both horse and donkey were domesticated in different regions almost concurrently around 5000 - 4200 years ago, with the horse being domesticated in Western Eurasian steppes [@warmuth_etal12; @librado_etal21] and the donkey in Northern Africa [@beja-pereira_etal04; @rossel_etal08]. 
+
+Iberian Peninsula has been home to wild or domesticated horses since the Holocene [@warmuth_etal12]. Equid bones have been reported continuously in the Western part of Iberia from the Late Pleistocene through the Medieval Period until the Modern Period [@detry07; @rowley-conwy93; @valente08; @davis06; @detry_fabiao21; @detry_etal16; @detry_arruda13; @cardoso93; @cardoso94; @davis_etal08; @cardoso95; @moralesmuniz_etal98]. During the Early and Middle Neolithic equid bones have been found only been reported from the site of Lameiras in Portugal [@valente_carvalho14; @valente_carvalho19]. By Late Neolithic, equid remains become more abundant but still scarce in comparison to the other species. The notable exception is the Late Neolithic site of Xacafre (Portugal) where more than 100 equid remains have been recovered [@aleixo18]. With the advent of the Chalcolithic and Bronze Ages, there is an increase in the number of equid remains across sites in the Iberian Peninsula [@harrison_etal87; @moralesmuniz_etal98; @castanos05].
+
+The extinct Iberian wild ass (*Equus hydruntinus*) has been found in Middle Palaeolithic, Neolithic, and Chalcolithic contexts from Portugal and Spain. Although some populations might have remained in Iberia until first millennium BCE [@schuhmacher_etal09], there is no evidence of domestication [@davis02; @davis_etal18; @cardoso_detry02]. It is widely accepted that domestic donkeys from North Africa were introduced to the Iberian Peninsula by the Phoenicians as early as the 8^th^ century BCE [@vondendriesch_boessneck85]. However, earlier dates have been proposed based on the discovery of a molar tooth, confirmed by mitochondrial DNA analysis to be donkey, at the Chalcolithic site of Leceia [@cardoso_etal13]. This is not surprising given that artefacts of North African origin, such as ivory and ostrich eggshells, have been reported in Portugal and South-West Spain from the Late Neolithic/Chalcolithic onwards [@schuhmacher_etal09; @valera_etal15; @valerio_etal18]. Skeletal elements of donkey are found in higher numbers starting in the Iron Age, with a noticeable increase during the Roman and Middle Ages [@detry_pimenta17; @davis06; @detry_etal16; @detry_arruda13; @davis_goncalves17; @davis_etal08]. In this complex scenario with significant archaeological questions regarding the presence and use of domesticated equids, ZooMS would be a valuable, cost-effective, and reliable tool to: (1) increase identification rate of horse and donkey remains across time periods; (2) interpret slaughter and birthing patterns similar to other domesticates [@castanos05].
+
+# ZooMS markers for equids
+
+Zooarchaeology by Mass Spectrometry (ZooMS) is a peptide mass fingerprinting technique developed to assign taxonomic identities based on collagen type I (COL1) peptide masses. The primary principle of ZooMS is to generate a peptide mass fingerprint from tryptic digests of bone or other collagen containing tissues using a matrix-assisted laser desorption/ionization time-of-flight (MALDI-TOF) mass spectrometer. In the past decade, researchers have successfully leveraged this technique to distinguish the genus *Equus* from other large mammal taxa in archaeological records using a standard panel of nine peptide markers [@buckley_etal09; @buckley_collins11; @p_kirby_etal13; @welkerfrido_etal16; @buckley_etal17]. However, these markers are invariant across all published species in the *Equus* genus (Table S2), which makes them unsuitable for species level identification. Recent studies have developed alternative markers for other regions of the collagen protein where amino acid differences allow for better taxonomic resolution of specific taxonomic groups, such as marsupials and bovids [@coutu_etal21; @peters_etal; @janzen_etal21]. Here we use genetic data to identify collagen sequence differences between horses and donkeys and  confirm a species specific ZooMS marker using a chymotrypin digestion that can reliably distinguish horses from donkeys across a range of archaeological sites.
+
+# Material and methods
+
+## Samples
+
+```{r eqtable1, echo=FALSE, results='asis'}
+options(knitr.kable.NA = "--")
+
+df_equus_overview %>%
+  select(sample_type,time_period,country,n) %>%
+  kbl(caption = "Overview of archaeological and taxonomic reference samples.", digits = 2, align="cccc", booktabs = T, linesep = "", format = "latex", escape = F, col.names=c("Sample Type", "Time Period","Country","Number of samples (n)")) %>%
+  kable_styling(latex_options = c("basic","HOLD_position")) |>
+  collapse_rows(columns = 1, latex_hline = "full", valign = "middle")
+```
+
+Reference bone samples (Table \ref{tab:eqtable1}) of horse and donkey (3 of each species) were sourced from the Mammalogy collection of Laboratório de Arqueociências (Direção Geral do Património Cultural, Lisbon). 20 -- 30 mg bone samples were taken from non-diagnostic sections of the bones. Archaeological samples (n = 40) originate from various sites across Portugal and Spain (Table \ref{tab:eqtable1}) ranging from the Early Iron Age to Early Modern period. Some of the samples were identifiable by morphology as either horse or donkey (n = 15) while the majority were only identifiable to the genus *Equus* (n = 25) (SI-1). From each archaeological bone a 10-40 mg sample was clipped (bone fragment) or drilled (bone powder) from a non-diagnostic portion of the bone.
+
+
+## Collagen extraction
+
+Collagen was extracted from both the reference and archaeological samples based on previously published acid-insoluble [@buckley_etal09;@welker_etal15] and acid-soluble [@vandersluis_etal14; @brown_etal20] protocols. Three blanks were extracted after every 12 samples as controls. All samples were first extracted using the acid-insoluble method. If this method failed due to either the samples degrading entirely in acid or if poor spectra were produced, the acid-insoluble method was used. Briefly bone fragments or powder were demineralised in 500 $\mu$l of 0.6M HCl for 48 hours after which the supernatant was collected and stored for acid-insoluble method. The samples were rinsed 3 times with 200 $\mu$l of 50 mM ammonium bicarbonate (AmBic), pH 8, followed by an incubation for 5 minutes at room temperature in 200 $\mu$l of of 0.1M NaOH to remove fulvic and humic acids. The samples were then rinsed 3 times with AmBic. 100 $\mu$l of 50 mM AmBic was added to the samples and they were gelatinized by incubating for 1 hour at 65 $\text{\textdegree}$C. 
+
+For the acid-soluble method the acid supernatant was filtered using a 30 kDa ultrafilter and centrifugation (3700 rpm). The samples were washed twice by adding 500 $\mu$l of AmBic to the ultrafilter and centrifuged. 100 $\mu$l of AmBic was added to the top of the filter and the collagen was resuspended through pipetting. The AmBic was then removed from the filter into a clean centrifuge tube.
+
+ 
+## Enzymatic testing
+
+Col1 sequences from horse (XP_023508478.1, XP_008516208.1, XP_001492989.1) and donkey (XP_014689063.1, ACM24774.1, XP_014708845.1, ACM24775.1) were aligned and analysed using Geneious$^\text{\texttrademark}$ (R11.1) [@kearse_etal12]. The sequences were theoretically digested with all of the enzymes available using PeptideMass$^\text{\texttrademark}$ from Expasy$^\text{\textregistered}$ [@wilkins_etal97; @gasteiger_etal05]. The peptides containing the amino acid differences were then identified and enzymes where at least two of the differences were on peptides that would be visible within the mass range of the MALDI. In order to assess the actual viability of the enzymes the six reference samples, plus two well identified archaeological horse samples were analysed. Multiple gelatinisations were performed from the same digested bone and pooled to make 400 $\mu$l of extracted collagen. Then digestions were performed on 50 $\mu$l of extracted collagen for each digestion.
+
+*Tryptic digestions:* Digestions were performed in AmBic with 0.4 $\mu$g trypsin (Promega$^\text{\textregistered}$ V5111) at 37 $\text{\textdegree}$C for 16-18 hours.
+
+*Glu-C digestions:* Extracted collagen was dried down and resuspended in 50 $\mu$l of 100 mM potassium phosphate buffer pH 8 and incubated with 0.8 $\mu$g Glu-C (Promega$^\text{\textregistered}$ V1651) at 37 $\text{\textdegree}$C for 16-18 hours.
+
+*Thermolysin digestions:* Extracted collagen was dried down and resuspended in 50 $\mu$l of 50 mM Tris(hydroxymethyl)aminomethane hydrochloride, 0.5 mM calcium chloride, pH 8 and incubated with 0.8 $\mu$g thermolysin (Promega$^\text{\textregistered}$ V4001) at 70 $\text{\textdegree}$C for 4 hours.
+
+*Chymotryptic digestions:* Extracted collagen was dried down and resuspended in 50 $\mu$l of Tris buffer (100 mM Tris(hydroxymethyl)aminomethane hydrochloride, 10 mM calcium chloride, pH 8.0) and incubated with 0.4 $\mu$g chymotrypsin (Promega $^\text{\textregistered}$ V1061) at 25 $\text{\textdegree}$C for 16 -- 18 hours.
+
+Dual digestion was performed with trypsin and chymotrypsin. Extracted collagen was dried down and resuspended in 50 $\mu$l of Tris buffer.  One set of samples were digested with 0.4 $\mu$g of trypsin and 0.8 $\mu$g of chymotrypsin at 25 $\text{\textdegree}$C for 16 -- 18 hours.  A second set of samples were digested with 0.8 $\mu$g of chymotrypsin at 25 $\text{\textdegree}$C for 16 -- 18 hours. Then 0.4 $\mu$g of trypsin was added and the samples were incubated at 37 $\text{\textdegree}$C for 30 minutes. All digestions were stopped by adding 1 $\mu$l of 5% trifluoroacetic acid (TFA).
+
+
+## Archaeological digestions
+
+Subsequent archaeological samples were gelatinized once and the resulting 100 $\mu$l of extracted collagen was split in half and digested separately with trypsin and chymotrypsin as described above.
+
+## Peptide mass fingerprinting and data analysis
+
+All digests were spotted in both undiluted and diluted 1:10, in duplicate on a BRUKER$^\text{\textregistered}$ MTP Groundsteel$^\text{\texttrademark}$ 394-target plate with equal volume of matrix (10 mg of $\alpha$-cyano-4-hydroxycinnamic acid in 1 ml of 50% acetonitrile (ACN)/0.1% TFA). 
+
+Samples were analysed on a Bruker$^\text{\textregistered}$ Ultraflextreme$^\text{\texttrademark}$ MALDI-TOF/TOF (Bruker Daltonics$^\text{\textregistered}$) with a smartbeam-II laser. A SNAP averaging algorithm was used to obtain monoisotopic masses (C: 4.9384, N: 1.3577, O: 1.4773, S: 0.0417, H: 7.7583) at the Harvard Center for Mass Spectrometry.
+
+The resulting spectra were analysed using mMass [@strohalm_etal10]. Spectra were assessed for presence of predicted or confirmed marker peaks based upon a S/N ratio of at least 3. Identification of tryptic ZooMS spectra was done based upon published markers [@buckley_etal09; @buckley_collins11; @p_kirby_etal13; @welkerfrido_etal16; @buckley_etal17]. The best spectrum for each sample is available at Zenodo ([10.5281/zenodo.6878868](https://doi.org/doi:10.5281/zenodo.6878868)).
+
+## Marker identification and confirmation
+
+After analysis of the MALDI data, one sample from each species was analysed using LC-MS/MS  at the Harvard Center for Mass Spectrometry. 4 $\mu l$ of chymotryptic digested collagen was analysed on an Orbitrap$^\text{\texttrademark}$ Elite mass spectrometer (Thermo Scientific$^\text{\textregistered}$) coupled with an Waters nanoACQUITY$^\text{\texttrademark}$ HPLC pump (Waters$^\text{\textregistered}$ AG). Peptides were separated onto a 100-$\mu m$ inner diameter microcapillary trapping column packed first with approximately 5 cm of C18 ReproSil$^\text{\texttrademark}$ resin (5 $\mu m$, 100 Å, Dr. Maisch$^\text{\textregistered}$, Germany) followed by an analytical column $\sim 20$ cm of ReproSil$^\text{\texttrademark}$ resin (1.9 $\mu m$, 200 Å, Dr. Maisch$^\text{\textregistered}$). Separation was achieved by applying a gradient from 5% to 27% acetonitrile in 0.1% formic acid over 90 minutes at 200 nl $min ^{-1}$. Electrospray ionization was enabled by applying a voltage of 1.8 kV using a home-made electrode junction at the end of the microcapillary column and sprayed from fused silica pico tips (New Objective$^\text{\texttrademark}$). The LTQ Orbitrap$^\text{\texttrademark}$ Elite was operated in the data-dependent mode for the mass spectrometry methods. The mass spectrometry survey scan was performed in the Orbitrap$^\text{\texttrademark}$ in the range of 400–1,800 m/z at a resolution of 6 × 104, followed by the selection of the 20 most intense ions (TOP20) for collision-induced dissociation (CID)-tandem mass spectrometry fragmentation in the ion trap using a precursor isolation width window of 2 m/z, automatic gain control (AGC) setting of 10,000, and a maximum ion accumulation of 200 ms. Singly charged ion species were not subjected to CID fragmentation. Normalized collision energy was set to 35 V and an activation time of 10 ms, AGC was set to 50,000, and the maximum ion time was 200 ms. Ions in a 10-ppm m/z window around ions selected for tandem mass spectrometry were excluded from further selection for fragmentation for 60 seconds.
+
+Resulting data was  processed using Byonic$^\text{\texttrademark}$ (v3.5.3) (74) in two steps. All runs had the following parameters: precursor mass tolerance: 10 ppm; fragment mass tolerance: 0.5 Da; Cleavage sites: C-terminal to tryptophan, phenylalanine, tyrosine, lysine, methionine, and histidine; with decoys. The first step was to identify any additional proteins in the sample other than collagen.
+
+This was done using a database composed of Swissprot$^\text{\texttrademark}$ (downloaded 13 May 2022) and the proteomes from horse (UP000002281, 44,487 proteins) and donkey (UP000694387, 33,257 proteins) and the parameters: fully specific cleavage, 2 missed cleaves, common modifications: deamidation on arginine and glutamine, oxidation of proline, methionine, and lysine; rare modifications: Glx to pyro-Glu on N-terminal glutamine and glutamic acid, ammonia loss on N-terminal cysteine; modifications allowed: common - 2, rare - 1. The peptide FDR rate cut off was 2% and a focused database was made from the proteins identified. The focused databases were then combined and duplicates were removed. Col1 sequences were also removed and replaced with the six curated equid sequences (see above).
+
+This database was then used to identify the collagen peptide sequences using Byonic$^\text{\texttrademark}$ with the following parameters: semi-specific cleavage, 2 missed cleaves, common modifications: deamidation on arginine and glutamine, oxidation of proline, methionine, and lysine; rare modifications: Glx to pyro-glu on N-terminal Q/E, ammonia loss on N-terminal C; modifications allowed: common - 6, rare - 1. The peptide FDR rate cut off was 1%. Data is available in ProteomeXchange (PXD035509) through Massive (doi:10.25345/C5T727K8H).
+
+
+## Data availability
+
+MALDI-TOF-MS spectra data have been deposited in Zenodo (https://doi.org/doi:10.5281/zenodo.6878868) and the LC-MS/MS spectra data have been deposited in ProteomeXchange (PXD035509) through Massive (MASSIVE MSV000089943) at https://doi.org/doi:10.25345/C5T727K8H. All other data are included in the manuscript and/or supporting information. The R code and data used for the study can be accessed at [https://osf.io/qsc25/](https://osf.io/qsc25/) for reproducibility and transparency. The code, data, and figures are  licensed under CC BY 4.0 [http://creativecommons.org/licenses/by/4.0/](http://creativecommons.org/licenses/by/4.0/), to enable maximum re-use.
+
+# Results and Discussion
+
+## Identification and confirmation of biomarkers
+
+
+(ref:equidmarkerplot-label) MALDI spectra of chymotryptic peptides of COL1 for horse (blue) and donkey (brown). The majority of the peaks present in the spectra are identical (upper), with the major difference between the two spectra being the diagnostic marker with horse at m/z 2497 and donkey at m/z 2511 (lower). The sequence of the peptide confirmed by LC-MS/MS is shown with the single amino acid difference between the two species highlighted in red.
+
+```{r equidmarkerplot, dpi=600, echo=FALSE, dpi=600, fig.show="hold", out.width='0.98\\textwidth',fig.align='center',fig.height=8,crop = NULL, fig.env='figure*', fig.cap= '(ref:equidmarkerplot-label)'}
+
+theme <-
+  theme(
+    panel.background = element_blank(),
+    panel.border = element_rect(fill = NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank(),
+    legend.position = 'none',
+    axis.text.x = element_text(colour = "black"),
+    axis.text.y = element_text(colour = "black"),
+    axis.ticks = element_line(colour = "black"),
+    plot.margin = unit(c(1, 1, 1, 1), "line")
+  )
+
+horse_donkey_zoom<- ggplot(NULL) + geom_line(data = df_ref_horse, aes(x=mass,y=intensity_norm),colour='#4682B4',size=0.5) + geom_line(data = df_ref_donkey_flip, aes(x=mass,y=intensity2),colour='#B47846',size=0.5) + theme + labs(x='m/z', y='Relative Intensity') + scale_x_continuous(limits=c(2450,2550),breaks=seq(2450,2550,10)) + scale_y_continuous(limits=c(-30,50),breaks=seq(-30,50,5)) + annotate(geom = "point", x = 2497.2, y = 26, colour = "#B4464B", size = 1) + annotate(geom = "text", x = 2496.8, y = 31, colour = "black", size = 2, label = '2497',angle=90) + annotate(geom = "point", x = 2511.2, y = -15, colour = "#B4464B", size = 1) + annotate(geom = "text", x = 2511, y = -20, colour = "black", size = 2, label = '2511',angle=90) + geom_hline(yintercept = 0, color='black',size=0.5) + annotate("text", x = 2450, y=45, hjust = 0, parse=T, label='"GRTGDAGPVGPPGPPGPPGPPGPPS" * phantom("GGFDFSFLP")', color="black", size = 2) + annotate("text", x = 2450, y=45, hjust = 0, parse=T, label='phantom("GRTGDAGPVGPPGPPGPPGPPGPPS") * "G" * phantom("GFDFSFLP")', color="red", size = 2) + annotate("text", x = 2450, y=45, hjust = 0, parse=T, label='phantom("GRTGDAGPVGPPGPPGPPGPPGPPSG") * "GFDFSFLP"', color="black", size = 2) + annotate("text", x = 2450, y=-30, hjust = 0, parse=T, label='"GRTGDAGPVGPPGPPGPPGPPGPPS" * phantom("AGFDFSFLP")', color="black", size = 2) + annotate("text", x = 2450, y=-30, hjust = 0, parse=T, label='phantom("GRTGDAGPVGPPGPPGPPGPPGPPS") * "A" * phantom("GFDFSFLP")', color="red", size = 2) + annotate("text", x = 2450, y=-30, hjust = 0, parse=T, label='phantom("GRTGDAGPVGPPGPPGPPGPPGPPSA") * "GFDFSFLP"', color="black", size = 2)
+
+
+horse_donkey_plot <- ggplot(NULL) + geom_line(data = df_ref_horse, aes(x=mass,y=intensity_norm),colour='#4682B4',size=0.5) + geom_line(data = df_ref_donkey_flip, aes(x=mass,y=intensity2),colour='#B47846',size=0.5) + theme + labs(x='m/z', y='Relative Intensity') + scale_x_continuous(limits=c(1000,3200),breaks=seq(1000,3200,200)) + annotate("text",x = 3000,y = 80,colour = "black" ,size = 3,label = expression(italic("Equus caballus"))) + annotate("text",x = 3000,y = -80,colour = "black" ,size = 3,label = expression(italic("Equus asinus"))) + geom_hline(yintercept = -0.5, color='black',size=0.5) + annotate("rect", xmin = 2450, xmax = 2550, ymin = -Inf, ymax = Inf,alpha = .2,colour='gray')
+
+
+
+horse_donkey_plot/horse_donkey_zoom
+```
+
+
+(ref:eqtable2-label) Amino acid differences between horse and donkey COL1 proteins and their predicted visibility by MALDI following enzymatic digestion. Published COL1 sequence data were obtained from horse (XP_023508478.1, XP_008516208.1, XP_001492989.1) and donkey (XP_014689063.1, ACM24774.1, XP_014708845.1, ACM24775.1). Proteins were digested in silico using Peptide Mass [@wilkins_etal97; @gattiker_etal02], and peptides were marked as theoretically visible if between m/z 800 and m/z 3500. Nomenclature of the amino acid locations after @brown_etal21.
+
+
+```{r eqtable2, echo=FALSE, results='asis'}
+options(knitr.kable.NA = "--")
+
+df_equus_colbiomarker <- data.frame(column1 = c('Horse','Donkey','Mass difference (Da)','Trypsin','Glu-C$^{a}$','Chymotrypsin','Thermolysin'), column2=c('G','A',14,NA,'X',NA,'X'), column3=c('N','K','14','X$^{*}$','X','X',NA), column4=c('S','T','14',NA,'X','X',NA), column5=c('S','T','14','X',NA,NA,'X'), column6=c('H','N','23',NA,NA,NA,'X'))
+
+
+df_equus_colbiomarker %>%
+  select(column1,column2,column3,column4,column5,column6) %>%
+  kbl(caption = "(ref:eqtable2-label)", digits = 2, align="cccccc", booktabs = T, linesep = "", format = "latex",table.env='table*', escape = F, col.names=c(" ", "COL1A1 1016","COL1A2 93","COL1A2 336", "COL1A2 411", "COL1A2 887")) %>%
+  kable_styling(latex_options = c("basic","HOLD_position")) |>
+  pack_rows("Predicted visibility by MALDI-TOF following enzymatic digestion",4,7, latex_gap_space = "1em") |>
+  footnote(symbol = c("visible in horse only as the amino acid difference is at a tryptic cut site.")) |>
+  footnote(alphabet = c("phosphate buffer."))
+```
+
+Analysis of published collagen sequence data identified five amino acid differences between horse and donkey, one on the gene *COL1A1* and four on *COL1A2* (Table \ref{tab:eqtable2}). This is consistent with the known higher mutation rate of *COL1A2*. Four enzymes (trypsin, Glu-C in a phosphate buffer, chymotrypsin, and thermolysin) cut at sites that should generate two or more peptides containing these amino acid differences based on in silico predictions. However, the MALDI spectra showed no peaks corresponding to these predicted peptides for any of the enzymes. Further analysis showed no consistent differences among *Equus* species based on the MALDI spectra for trypsin, Glu-C, and thermolysin. This is not surprising as only part of the collagen protein is reliably visible in the MALDI spectra [@buckley_etal09; @janzen_etal21].
+
+Spectra produced from the enzyme chymotrypsin had one consistently visible difference between the species corresponding to a 14 Da mass difference (Figure \ref{fig:equidmarkerplot}). However, the masses (m/z 2497 and m/z 2511) did not correspond to any of the masses of the theoretically chymotryptic digested peptides (Table \ref{tab:eqtable2}). 
+
+In order to assess the reliability and authenticity of this proposed marker we: (1) conducted LC-MS/MS analysis to sequence the peptide, and (2) compared the sequence data to enzyme activity profiles for chymotrypsin. LC-MS/MS confirmed the sequence of the candidate markers that covered the known amino acid difference between the species at COL1A1 1016 (horse: GRTGDAGPVGPPGPPGPPGPPGPPS**G**GF, donkey: GRTGDAGPVGPPGPPGPPGPPGPPS**A**GF) (SI Figure-1). However, the peptides were only cleaved on one end at a common chymotryptic cut site (C-terminal to phenylalanine) and the other site is not commonly reported as a chymotryptic cut site (C-terminal to arginine, before the glycine in the reported peptide). Because trypsin cuts C-terminal to an arginine, dual digestions with chymotrypsin and trypsin were attempted. However due to the differences in activity between trypsin and chymotrypsin, only the fully tryptic peaks were visible in the MALDI-TOF spectra both dual and sequential digestions.
+
+Enzymatic digestion can be variable, with the probability of cutting at any one location based upon the buffer solution [@tipton_etal09], presence of cofactors [@broderick01], the primary amino acid [@keil12], amino acid composition up to six amino acids in either direction of the cut site [@keil12], and the structure of the protein [@hartley60]. This is commonly seen in ZooMS with trypsin. Trypsin cuts primarily at the C-terminal side of arginine and lysine but often does not cut when a proline follows the arginine or lysine in the sequence [@rodriguez_etal08; @olsen_etal04]. Some of the standard ZooMS markers are based on these predictable missed cleavages due to the presence of a proline [@keil12]. Chymotrypsin activity has been thoroughly investigated [@keil12]. Chymotrypsin cuts at the C-terminal side of tyrosine, phenylalanine, and tryptophan, and with lower efficiency at the C-terminal side of leucine, methionine, and histidine. Cleavages on the C-terminal side of arginine are also possible although rare [@keil12]. Nevertheless, we do observe multiple cleavages C-terminal to arginine during chymotrypsin digestion of equid COL1.
+
+In this case, the following factors increase the likelihood of cleavage at this particular arginine.  First, there is a low number of preferential cut sites in collagen as tyrosine, phenylalanine, and tryptophan are largely absent because they generally destabilise the collagen triple helix [@bella16]. Therefore, non-preferential cleavage sites are more commonly seen [@gattiker_etal02]. Second, the sequence around the cleavage is GP**R**GRT. The three amino acids around the cleavage site are known to impact the success of cleavage for chymotrypsin, especially when the affinity to the primary amino acid (in this case the arginine before the cut site) is low [@keil12]. Both amino acid and location impact that success. For example, although a proline directly after an arginine inhibits cleavage by trypsin, a proline before an arginine increases the likelihood of cleavage by chymotrypsin. Also increasing the likelihood of cleavage after this particular arginine are the glycine in the first position after the cut site and the arginine in the second position after the cut site [@gibson_dixon69; @keil87; @keil12]. 
+
+When analysing the remaining LC-MS/MS data using semi-specific and non-specific parameters, cleavage was highly specific after the few tyrosine, tryptophan, and phenylalanine present in collagen.  Cleavage also occurred after lysine and methionine when they were not followed by a proline inhibiting enzyme binding.  The most common non-preferential cleavage site in both COL1A1 and COL1A2 is between arginine and glycine, and it most often occurs when there is a proline or alanine preceding the arginine. Thus, while the identified peptide to distinguish horses and donkeys exhibits atypical chymotryptic cleavage, it is repeatable and reliable when the sample is predominantly composed of collagen and the lack of preferential cut sites, causes the enzyme to cut repeatedly and reliably at non-preferential sites. 
+
+
+## Modern and Archaeological samples
+
+(ref:resultbarplotr-label) Taxonomic assignment of 40 archaeological *Equus* skeletal remains using conventional morphological and ZooMS techniques. (a) Morphological analysis results in a high proportion (62.5%) of bones that cannot be reliably classified below the level of genus (*Equus*), whereas all bones could be identified to the species level (*E. caballus* or *E. asinus*) using ZooMS. (b) Taxonomic analyses based only on bones identifiable to species result in discrepant estimations of the relative abundance of horses and donkeys depending on the identification method. Morphological analysis appears to under-identify donkeys, potentially introducing bias into downstream analyses. 
+
+```{r resultbarplotr, dpi=600, echo=FALSE, dpi=600, fig.show="hold", out.width='0.70\\textwidth',fig.align='center',fig.height=5,crop = NULL, fig.env='figure*', fig.cap= '(ref:resultbarplotr-label)'}
+
+
+df_equus_sample_resolution_compare <- data.frame(idmethod = c(rep("Morphological",3), rep("ZooMS",2)), percent = c(62.5,27.5,10,55,45), species = c("Equus", "Equus caballus", "Equus asinus", "Equus caballus", "Equus asinus"))
+
+df_equus_sample_resolution_taxonomic <- data.frame(idmethod = c(rep("Morphological",3), rep("ZooMS",2)), percent = c(0,73.33,26.6,55,45), species = c("Equus","Equus caballus", "Equus asinus", "Equus caballus", "Equus asinus"))
+
+theme_border <- theme_minimal() + theme(plot.background = element_rect(fill = NA, colour = 'black', size = 1))
+
+lbl_eq <- c(expression(italic("Equus")),expression(italic("Equus caballus")),expression(italic("Equus asinus")))
+
+colo_eq <- c("Equus" = "#808080", "Equus caballus" = "#4682B4", "Equus asinus" = "#B47846")
+
+eq_p1 <- ggplot(df_equus_sample_resolution_compare, aes(x=idmethod,y=percent,fill=species)) + geom_bar(stat="identity", position="stack", size = 0.4) + labs(x = NULL, y = "Relative percentage of the dataset", fill = '') + scale_fill_manual(label = lbl_eq, values=colo_eq)+ labs(tag = "(a)") + theme_classic()
+
+
+eq_p2 <- ggplot(df_equus_sample_resolution_taxonomic, aes(x=idmethod,y=percent,fill=species)) + geom_bar(stat="identity", position="stack", size = 0.4) + labs(x = NULL, y = "Relative percentage of the dataset", fill = '') + scale_fill_manual(label = lbl_eq, values=colo_eq)+ labs(tag = "(b)") + theme_classic()
+
+
+eq_p1 + eq_p2 + plot_annotation(theme = theme_border) + plot_layout(guides = "collect") & theme(legend.position = 'bottom')
+```
+
+The geographical origin and time period of the samples analysed in this study are presented in Table \ref{tab:eqtable1}.
+Taxonomic reference samples from the Laboratório de Arqueociências (Direção Geral do Património Cultural, Lisbon) mammal collection produced high quality tryptic and chymotryptic digests. The tryptic digest spectra were used to confirm that the samples were indeed equids using the presence of previously reported *Equus* marker peaks (SI-2) [@welkerfrido_etal16]. All of the archaeological samples (n = 40) analysed had sufficient collagen preservation to allow taxonomic identification as *Equus*, in case of tryptic digests, and as either horse or donkey, in the case of chymotryptic digests (Figure \ref{fig:resultbarplotr}). Of the 40 archaeological bone specimens, traditional morphological analyses identified 25 as *Equus* sp., 11 specimens as horses, and 4 as donkeys. Using the new collagen marker, we could unambiguously distinguish all samples as either horse (n = 22) or donkey (n = 18). Of the 15 *Equus* specimens assigned to the species level based on morphological criteria, the ZooMS identification was in agreement for all but one (Table S1). The sample MJV.15,a neonatal individual, was presumed to be a horse but formally identified just as an equid, as morphologically there are no criteria to distinguish neonatal equids. This assumption was based on the fact that the other equid remains from the same context (Portuguese Medieval Islamic) were adult horses. But ZooMS identified the individual as a donkey.
+
+Because of the close evolutionary distance within Equidae [@orlando_etal13], sterile hybrids can be produced between horses and donkeys: mules (*Equus asinus*$^{\male}$ x *Equus caballus*$^{\female}$) and hinnies (*Equus caballus*$^{\male}$ x *Equus asinus*$^{\female}$). Hybrids are both wild born and also intentionally bred for favourable characteristics such as enhanced strength and harder hooves. In designing the study, we attempted to exclude bones likely derived from hybrids, although that possibility cannot be excluded entirely. Hybrids are frequently difficult to distinguish in the archaeological record using either morphological characteristics or mtDNA, leaving nuclear DNA as the only entirely reliable indicator at present [@schubert_etal17]. However, because hybrids have copies of both horse and donkey COL1 genes, they should be identifiable by ZooMS. Therefore, further characterisation of this ZooMS marker which separates horses and donkeys in both other species of equids (wild asses and zebras) and equid hybrids will be important.
+
+The archaeological bones in this study were chosen because they were well preserved with enough morphological characteristics to be able to be identified to at least genus level across a wide spatial-temporal range in Western Iberia. The successful application of a new ZooMS marker to this sample set showcases the ability of ZooMS to now distinguish between domestic equid species. In addition, because ZooMS increases the proportion of taxonomically identified bones, it reduces bias in the analysis due to missing data. For example, in comparing taxonomic profiles obtained for this sample set, we observed that morphological analysis tends to underidentify donkeys, resulting in inflated estimations of the relative abundance of horses (Figure \ref{fig:resultbarplotr} (b)).
+
+
+# Conclusion
+
+We have successfully developed a ZooMS marker using the enzyme chymotrypsin and demonstrated that it can be used to reliably distinguish domestic horse and donkey. This is the first use of an enzyme other than trypsin for ZooMS on archaeological material, and therefore we propose an approach for suspected equids in which collagen extracts are split into two fractions and digested separately, first with trypsin for confirmation of *Equus* genus using the standard ZooMS markers, and then with chymotrypsin to distinguish domestic horse and donkey. The ability to quickly and easily discriminate domestic horses and donkeys using ZooMS is highly valuable for zooarchaeological studies as these species are often indistinguishable morphologically, but are treated economically and culturally very differently.
+
+# Supporting Information {-}
+
+Supplementary Information File (PDF)
+
+# Acknowledgements {-}
+  We would like to thank Vanessa Naverette Belda (Universidade de Évora) and Mariana Nabais (Universidade de Lisboa) for providing samples for the study, Sunia A.Trauger and Renee A. Robinson at the Harvard Center for Mass Spectrometry for technical assistance, and Andrew Cepeda and Chris Paul for logistical support. The authors would also like to thank Simon Davis and Carlos Pimenta whose efforts have resulted in the taxonomic reference collection at Laboratório de Arqueociências (Direção Geral do Património Cultural, Lisbon). R.P thanks Silvia Russo for help in finding colour-blind friendly palette for data visualisation. R.P and C.B.D have received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No. 766311. C.W is supported by the European Research Council under the European Union’s Horizon 2020 Research and Innovation Program Grant 804884-DAIRYCULTURES, the Werner Siemens Stiftung (“Paleobiotechnology”), the Max Planck–Harvard Research Center for the Archaeoscience of the Ancient Mediterranean, and Harvard University.
+
+# References {-}
+
