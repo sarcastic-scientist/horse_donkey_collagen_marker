@@ -33,7 +33,7 @@ author:
           
 address:
   - code: Universidade de Évora
-    address: Departamento de Química, Escola de Ciências e Tecnologia, Universidade de Évora, Colégio Luís António Verney, Rua Romão Ramalho 59, Évora, Portugal (7000-671)
+    address: Departamento de Química, Escola de Ciências e Tecnologia, Colégio Luís António Verney, Rua Romão Ramalho 59, Évora, Portugal (7000-671)
   - code: Universidade de Lisboa
     address: Centro de Arqueologia da Universidade de Lisboa, Faculdade de Letras da Universidade de Lisboa, Alameda da Universidade, Lisboa, Portugal (1600-214)
   - code: Laboratório HERCULES
