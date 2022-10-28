@@ -1,3 +1,21 @@
-sample,taxonomicid,idtype,numproteinsonetar,COLoneAonebesthittwostar,percentCOVtwostar,COLoneAtwobesthittwostar,percentCOVtwostar1
-LARC.265,Equus caballus,Modern,7,Equus caballus,93,Equus caballus,95
-LARC.1498,Equus asinus,Modern,6,Equus asinus,78,Equus asinus,89
+aminoacid,phd265,phd1498,totalcutsites,percentaminoacidinhorse,scaledpercentchange
+F,650,375,1025,1.35,1907
+M,190,44,234,0.48,1183
+Y,53,49,102,0.29,832
+L,469,329,798,2.65,696
+R,490,280,770,5.21,291
+H,61,14,75,0.58,243
+N,56,53,109,1.59,81
+Q,91,42,133,2.51,40
+T,51,35,86,1.74,31
+K,87,26,113,3.23,-0.08
+S,20,29,49,3.67,-0.65
+A,55,44,99,10.81,-0.76
+E,19,11,30,4.49,-0.82
+I,5,2,7,1.06,-0.83
+D,11,4,15,2.8,-0.86
+G,68,51,119,33.3,-0.91
+V,3,3,6,2.7,-0.94
+P,8,1,9,21.53,-0.99
+C,0,0,0,0,0
+W,0,0,0,0,0

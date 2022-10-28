@@ -52,9 +52,8 @@ Figure S1:	MS/MS examples for the distinguishing chymotryptic peptide in horse a
 
 ### Supplemental Tables {-}
 
-Table S1:	Sample list of all archaeological and taxonomic reference samples analysed in this study. \
-Table S2:	List of published collagen markers for species from the Equidae family. \
-Table S3: 	Number of proteins in proteome search and coverage of collagen for confirmation search digested with chymotrypsin.
+Table S1:	List of published collagen markers for species from the Equidae family. \
+Table S2: 	Number of proteins in proteome search and coverage of collagen for confirmation search digested with chymotrypsin.
 
 \newpage
 
@@ -66,7 +65,7 @@ The MS/MS spectra of the peptides for the diagnostic marker COL1A1 991-1018 from
 
 ### Horse: m/z 2497 {-}
 
-```{r sifig1horse, dpi=600, echo=FALSE, message = FALSE, error = FALSE, warning = FALSE, fig.width=10, fig.height=8,crop = NULL,fig.cap= NULL,fig.align='center'}
+```{r sifig1horse, dpi=600, echo=FALSE, message = FALSE, error = FALSE, warning = FALSE, out.width="100%", fig.height=10,crop = NULL,fig.cap= NULL, fig.env='figure*',fig.align='center'}
 
 knitr::include_graphics(
   here::here('./img/265-2497.png'),
@@ -80,7 +79,7 @@ knitr::include_graphics(
 ### Donkey m/z 2511 {-}
 
 
-```{r sifig1donkey, dpi=600, echo=FALSE, message = FALSE, error = FALSE, warning = FALSE, fig.width=10, fig.height=8,crop = NULL,fig.cap= NULL,fig.align='center'}
+```{r sifig1donkey, dpi=600, echo=FALSE, message = FALSE, error = FALSE, warning = FALSE, out.width="100%", fig.height=10,crop = NULL,fig.cap= NULL, fig.env='figure*',fig.align='center'}
 
 knitr::include_graphics(
   here::here('./img/1498-2511.png'),
@@ -97,42 +96,11 @@ knitr::include_graphics(
 
 <!-- SI 1 Section Start -->
 
-```{r eqoverview, include=FALSE}
-knitr::opts_chunk$set(echo=TRUE)
-
-df_equus_main <- here("./data/equus_sample_list_main.csv") |>
-  read_csv(col_names = TRUE) |>
-  mutate(morphological_id=str_replace_all(morphological_id,"sp.", "{\\\\normalfont sp.}"))
-
-```
-
-
-```{r si1table, echo=FALSE, results='asis'}
-options(knitr.kable.NA = "--")
-
-df_equus_main |>
-  select(sample_id,lab_code,Site,Country,Chronology,skeletal_element,morphological_id,zooms_id) |>
-  kbl(caption = "Sample list of all archaeological and taxonomic reference samples analysed in this study.", digits = 2, align="cccccccccc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=c("Sample ID", "Lab Code","Site","Country","Time Period","Skeletal Element", "Morphological Id.", "ZooMS Id.")) %>%
-  kable_styling(position = "center",latex_options = c("basic"), font_size = 7) |>
-  column_spec(7:8, italic=T) |>
-  row_spec(36, bold = T) |>
-  footnote(general = "The entry in bold was formally identified as an equid but presumed to be horse since all the other equids from the same context were adult horses. But ZooMS identification revealed it to be a donkey.") |>
-  landscape()
-  
-```
-
-\newpage
-
-<!-- SI 1 Section End -->
-
-
-<!-- SI 2 Section Start -->
-
 (ref:welkerfridoetal16) @welkerfrido_etal16
 (ref:horses2ref) @welkerfrido_etal16; @buckley_etal09; @buckley_collins11; @p_kirby_etal13; @buckley_etal17
 
 
-```{r si2, include=FALSE}
+```{r si1, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE)
 
 df_equus_marker <- here("./data/equus_marker_list.csv") |>
@@ -144,7 +112,7 @@ df_equus_marker$References <- c("(ref:welkerfridoetal16)","(ref:welkerfridoetal1
 (ref:footnotes2table) The nomenclature of the markers follow the scheme recommended in @brown_etal21.
 
 
-```{r si2tablep1, echo=FALSE, results='asis'}
+```{r si1tablep1, echo=FALSE, results='asis'}
 options(knitr.kable.NA = "--")
 
 df_equus_marker |>
@@ -158,9 +126,42 @@ df_equus_marker |>
 ```
 
 
-#### References {-}
 \
 
+<!-- SI 1 Section End -->
+
+<!-- SI 2 Section Start -->
+
+```{r si2, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+
+df_equus_si2 <- here("./data/si2table.csv") |>
+  read_csv(col_names = TRUE)
+
+```
+
+
+(ref:footnotes2tablea) Filters: 2 or more unique peps, log prob > 3, run against database of SwissProt$^\text{\texttrademark}$, horse proteome, donkey proteome.
+
+(ref:footnotes2tableb) from the semi-specific Byonic$^\text{\texttrademark}$ runs with the limited database.
+
+
+```{r si2tablep1, echo=FALSE, results='asis'}
+options(knitr.kable.NA = "--")
+
+df_equus_si2 |>
+  select(sample,taxonomicid,idtype,numproteinsonetar,COLoneAonebesthittwostar,percentCOVtwostar,COLoneAtwobesthittwostar,percentCOVtwostar1) |>
+  kbl(caption = " Number of proteins in proteome search and coverage of collagen for confirmation search digested with chymotrypsin.", digits = 2, align="llcclclc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=c("Sample","Taxonomic ID","Sample Type","\\# proteins $^{a}$","COL1A1 best hit $^{b}$","\\% COV $^{b}$","COL1A2 best hit $^{b}$", "\\% COV $^{b}$")) %>%
+  kable_styling(position = "left",latex_options = c("basic","scale_down")) |>
+  column_spec(2, italic=T) |>
+  column_spec(5, italic=T) |>
+  column_spec(7, italic=T) |>
+  footnote(alphabet = c("(ref:footnotes2tablea)","(ref:footnotes2tableb)"))
+  
+```
+
+
+<!-- SI 2 Section End -->
 
 <!-- SI 3 Section Start -->
 
@@ -173,24 +174,36 @@ df_equus_si3 <- here("./data/si3table.csv") |>
 ```
 
 
-(ref:footnotes3tablea) Filters: 2 or more unique peps, log prob > 3, run against database of SwissProt$^\text{\texttrademark}$, horse proteome, donkey proteome.
+(ref:footnotes3tablea) From LC-MS/MS data with Total being the sum of cut sites in both samples.
 
-(ref:footnotes3tableb) from the semi-specific Byonic$^\text{\texttrademark}$ runs with the limited database.
+(ref:footnotes3tableb) From the mature COL1A1 and COL1A2 proteins identified from Protein Calculator [@anthis_clore13].
 
 
 ```{r si3tablep1, echo=FALSE, results='asis'}
 options(knitr.kable.NA = "--")
 
+df_equus_si3[1,1] = cell_spec(df_equus_si3[1,1], bold =  TRUE)
+df_equus_si3[2,1] = cell_spec(df_equus_si3[2,1], bold =  TRUE)
+df_equus_si3[3,1] = cell_spec(df_equus_si3[3,1], bold =  TRUE)
+df_equus_si3[4,1] = cell_spec(df_equus_si3[4,1], bold =  TRUE)
+df_equus_si3[5,1] = cell_spec(df_equus_si3[5,1], color = "red", bold = TRUE)
+df_equus_si3[6,1] = cell_spec(df_equus_si3[6,1], bold =  TRUE)
+
 df_equus_si3 |>
-  select(sample,taxonomicid,idtype,numproteinsonetar,COLoneAonebesthittwostar,percentCOVtwostar,COLoneAtwobesthittwostar,percentCOVtwostar1) |>
-  kbl(caption = " Number of proteins in proteome search and coverage of collagen for confirmation search digested with chymotrypsin.", digits = 2, align="llcclclc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=c("Sample","Taxonomic ID","Sample Type","\\# proteins $^{a}$","COL1A1 best hit $^{b}$","\\% COV $^{b}$","COL1A2 best hit $^{b}$", "\\% COV $^{b}$")) %>%
-  kable_styling(position = "left",latex_options = c("basic","scale_down")) |>
-  column_spec(2, italic=T) |>
-  column_spec(5, italic=T) |>
-  column_spec(7, italic=T) |>
-  footnote(alphabet = c("(ref:footnotes3tablea)","(ref:footnotes3tableb)"))
+  select(aminoacid,phd265,phd1498,totalcutsites,percentaminoacidinhorse,scaledpercentchange)|>
+  kbl(caption = "The scaled percentage change of observation of cut sites to the total percentage of the amino acids in the collagen sequence in comparsion to the cut site specificity profile of chymotrypsin.  The primary and secondary preferred chymotrypsin cut sites are indicated in bold.  Arginine is indicated in red.  Amino acids are grouped into samples with increased percent change and decreased percent change.", digits = 2,  align="cccccc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=c("Amino Acid","Cut sites in LARC.265 $^{a}$","Cut sites in LARC.1498 $^{a}$","Total cut sites $^{a}$","\\% amino acid in horse sequence $^{b}$","Scaled percent change (\\%)")) |>
+  kable_styling(latex_options = c("basic","scale_down","HOLD_position")) |>
+  footnote(alphabet = c("(ref:footnotes3tablea)","(ref:footnotes3tableb)")) |>
+  row_spec(9, hline_after = TRUE) |>
+  row_spec(18, hline_after = TRUE)
   
 ```
 
+\newpage
 
 <!-- SI 3 Section End -->
+
+#### References {-}
+\
+
+
