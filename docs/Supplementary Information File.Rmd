@@ -117,7 +117,7 @@ options(knitr.kable.NA = "--")
 
 df_equus_marker |>
   select(scientificname,col1a1508519,col1a1586618,col1a1586618p16,col1a2978990,col1a2978990p16,col1a2484498,col1a2502519,col1a2292309,col1a2793816,col1a2454483,col1a2757789,col1a21042,References) |>
-  kbl(caption = "List of published collagen markers for species from the Equidae family.", digits = 2, align="lccccccccccccccc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=linebreak(c("Scientific Name","COL1A1\n508-519", "COL1A1\n586-618", "COL1A1\n586-618 (+16)", "COL1A2\n978-990","COL1A2\n978-990 (+16)", "COL1A2\n484-498", "COL1A2\n502-519", "COL1A2\n292-309", "COL1A2\n793-816", "COL1A2\n454-483", "COL1A2\n757-789", "COL1A2\n10-42","References"))) %>%
+  kbl(caption = "List of published ZooMS collagen markers for species from the Equidae family using trypsin.", digits = 2, align="lccccccccccccccc", booktabs = T,longtable=F, linesep = "", format = "latex", escape = F, col.names=linebreak(c("Scientific Name","COL1A1\n508-519", "COL1A1\n586-618", "COL1A1\n586-618 (+16)", "COL1A2\n978-990","COL1A2\n978-990 (+16)", "COL1A2\n484-498", "COL1A2\n502-519", "COL1A2\n292-309", "COL1A2\n793-816", "COL1A2\n454-483", "COL1A2\n757-789", "COL1A2\n10-42","References"))) %>%
   kable_styling(position = "left",latex_options = c("basic","scale_down")) |>
   column_spec(1, italic=T) |>
   footnote(general = "(ref:footnotes2table)") |>
