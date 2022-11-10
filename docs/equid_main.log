@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.28)  3 NOV 2022 12:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.28)  10 NOV 2022 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -703,7 +703,7 @@ Package caption Info: float package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 174.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -711,49 +711,49 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 174.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 174.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 174.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 174.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 174.
+(Font)              <10> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 174.
+(Font)              <7> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 174.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 174.
+(Font)              <5> on input line 175.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 174.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 174.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 174.
+(Font)              <8> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 174.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 174.
+(Font)              <6> on input line 175.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 175.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -768,177 +768,177 @@ Overfull \hbox (2.22221pt too wide) has occurred while \output is active
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cnotenum' on input line 180.
+(hyperref)                removing `\cnotenum' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@corref' on input line 180.
+(hyperref)                removing `\@corref' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 180.
+(hyperref)                removing `\<let>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 180.
+(hyperref)                removing `\comma' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 180.
+(hyperref)                removing `\<def>-command' on input line 181.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 180.
+(hyperref)                removing `\@fnmark' on input line 181.
 
 [1
 
 {c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 235.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 236.
 (c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
 []\T1/lmr/m/n/10 (+20) MALDI-TOF-MS spec-tra data have been de-posited in Zen-odo
  []
 
 
-Underfull \hbox (badness 5548) in paragraph at lines 280--281
+Underfull \hbox (badness 5548) in paragraph at lines 281--282
 \T1/lmr/m/n/10 (+20) (https://doi.org/doi:10.5281/zenodo.6878868) and the LC-MS/MS spec-tra data have been de-
  []
 
 
-Underfull \hbox (badness 7869) in paragraph at lines 280--281
+Underfull \hbox (badness 7869) in paragraph at lines 281--282
 \T1/lmr/m/n/10 (+20) posited in Pro-teomeX-change (PXD035509) through Mas-sive (MAS-SIVE MSV000089943) at
  []
 
-<../img/equid_marker.jpg, id=143, 3011.25pt x 3011.25pt>
+<../img/equid_marker.jpg, id=144, 3011.25pt x 3011.25pt>
 File: ../img/equid_marker.jpg Graphic file (type jpg)
 <use ../img/equid_marker.jpg>
-Package pdftex.def Info: ../img/equid_marker.jpg  used on input line 291.
+Package pdftex.def Info: ../img/equid_marker.jpg  used on input line 292.
 (pdftex.def)             Requested size: 468.0pt x 467.97952pt.
 [6] [7 <../img/equid_marker.jpg>]
-<../img/chymocutsite.jpg, id=163, 2301.59875pt x 1527.7075pt>
+<../img/chymocutsite.jpg, id=164, 2301.59875pt x 1527.7075pt>
 File: ../img/chymocutsite.jpg Graphic file (type jpg)
 <use ../img/chymocutsite.jpg>
-Package pdftex.def Info: ../img/chymocutsite.jpg  used on input line 328.
+Package pdftex.def Info: ../img/chymocutsite.jpg  used on input line 329.
 (pdftex.def)             Requested size: 468.0pt x 310.64117pt.
 [8] [9 <../img/chymocutsite.jpg>] [10]
-Overfull \hbox (93.49644pt too wide) in paragraph at lines 344--398
+Overfull \hbox (93.49644pt too wide) in paragraph at lines 345--399
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 6.98337pt on input line 398.
+LaTeX Warning: Float too large for page by 6.98337pt on input line 399.
 
 [11]
-<equid_main_files/figure-latex/resultbarplotr-1.pdf, id=189, 469.755pt x 361.35pt>
+<equid_main_files/figure-latex/resultbarplotr-1.pdf, id=190, 469.755pt x 361.35pt>
 File: equid_main_files/figure-latex/resultbarplotr-1.pdf Graphic file (type pdf)
 <use equid_main_files/figure-latex/resultbarplotr-1.pdf>
-Package pdftex.def Info: equid_main_files/figure-latex/resultbarplotr-1.pdf  used on input line 408.
+Package pdftex.def Info: equid_main_files/figure-latex/resultbarplotr-1.pdf  used on input line 409.
 (pdftex.def)             Requested size: 327.59857pt x 252.00043pt.
 [12
 
@@ -948,18 +948,18 @@ Package rerunfilecheck Info: File `equid_main.out' has not changed.
 (rerunfilecheck)             Checksum: A22763BA41B3B54F774F55F4509803F1;3057.
  ) 
 Here is how much of TeX's memory you used:
- 17794 strings out of 477011
- 293567 string characters out of 5825671
- 701736 words of memory out of 5000000
- 38228 multiletter control sequences out of 15000+600000
- 550793 words of font info for 183 fonts, out of 8000000 for 9000
+ 17798 strings out of 477011
+ 293620 string characters out of 5825671
+ 701711 words of memory out of 5000000
+ 38229 multiletter control sequences out of 15000+600000
+ 550923 words of font info for 184 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  72i,13n,79p,2602b,530s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx7.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri7.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb><c:/Users/rosha/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/wasy-type1/wasy10.pfb>
-Output written on equid_main.pdf (19 pages, 1370769 bytes).
+Output written on equid_main.pdf (19 pages, 1369565 bytes).
 PDF statistics:
- 557 PDF objects out of 1000 (max. 8388607)
- 481 compressed objects within 5 object streams
- 167 named destinations out of 1000 (max. 500000)
+ 558 PDF objects out of 1000 (max. 8388607)
+ 482 compressed objects within 5 object streams
+ 168 named destinations out of 1000 (max. 500000)
  46240 words of extra memory for PDF output out of 51595 (max. 10000000)
 
